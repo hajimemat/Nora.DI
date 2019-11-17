@@ -12,13 +12,16 @@ class Bind
     {
         $this->container = $container;
         $this->interface = $interface;
+        $this->validator = new BindValidator;
     }
 
     public function to(string $class) : self
     {
+        $refClass = $this->validator->to($this->interface, $class);
+
         $this->bound = new Dependency(
             new NewInstance(
-                new \ReflectionClass($class),
+                $refClass,
                 new SetterMethods([])
             )
         );
@@ -53,8 +56,9 @@ class Bind
 
     public function toProvider(string $provider, string $context = '') : self
     {
+        $refClass = $this->validator->toProvider($provider);
         $this->bound = (new DependencyFactory)->newProvider(
-            new \ReflectionClass($provider),
+            $refClass,
             $context
         );
         $this->container->add($this);

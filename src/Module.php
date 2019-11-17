@@ -33,7 +33,7 @@ abstract class Module implements ModuleInterface
         $this->configure();
     }
 
-    protected function getContainer() : Container
+    public function getContainer() : Container
     {
         if (!$this->container) {
             $this->activate();
