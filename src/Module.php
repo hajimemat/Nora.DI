@@ -35,6 +35,9 @@ abstract class Module implements ModuleInterface
 
     protected function getContainer() : Container
     {
+        if (!$this->container) {
+            $this->activate();
+        }
         return $this->container;
     }
 
@@ -63,11 +66,17 @@ abstract class Module implements ModuleInterface
      */
     public function install(self $module)
     {
-        $this->getContainer()->merge($tmodule->getContainer());
+        $this->getContainer()->merge($module->getContainer());
     }
 
     /**
      * モジュール設定
      */
     abstract public function configure();
+
+    public function override(self $module)
+    {
+        $module->getContainer()->merge($this->container);;
+        $this->container = $module->getContainer();
+    }
 }

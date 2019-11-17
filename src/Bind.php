@@ -44,6 +44,23 @@ class Bind
         return $this;
     }
 
+    public function toInstance($instance) : self
+    {
+        $this->bound = new Instance($instance);
+        $this->container->add($this);
+        return $this;
+    }
+
+    public function toProvider(string $provider, string $context = '') : self
+    {
+        $this->bound = (new DependencyFactory)->newProvider(
+            new \ReflectionClass($provider),
+            $context
+        );
+        $this->container->add($this);
+        return $this;
+    }
+
     public function getBound()
     {
         return $this->bound;
@@ -64,5 +81,13 @@ class Bind
             }, []
         );
         return implode(',', $names);
+    }
+
+    public function in(String $scope) : self
+    {
+          if ($this->bound instanceof Dependency || $this->bound instanceof DependencyProvider) {
+            $this->bound->setScope($scope);
+          }
+          return $this;
     }
 }

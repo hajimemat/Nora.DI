@@ -16,4 +16,14 @@ class DependencyFactory
 
         return new Dependency($new_instance, $post_construct);
     }
+
+    public function newProvider(
+        \ReflectionClass $class,
+        string $context
+    ) : DependencyProvider {
+        $dependency = new Dependency(
+            new NewInstance($class, new SetterMethods([]), new Name(Name::ANY))
+        );
+        return new DependencyProvider($dependency, $context);
+    }
 }

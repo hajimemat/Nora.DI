@@ -57,4 +57,9 @@ class Container
     {
         return new Unbound($index);
     }
+
+    public function merge(self $container)
+    {
+        $this->container += $container->getContainer();
+    }
 }
