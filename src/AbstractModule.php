@@ -3,7 +3,10 @@ declare(strict_types=1);
 
 namespace Nora\DI;
 
-abstract class Module implements ModuleInterface
+/**
+ * DI用モジュール
+ */
+abstract class AbstractModule implements ModuleInterface
 {
     /**
      * @var self ラストモジュール
