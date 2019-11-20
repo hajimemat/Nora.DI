@@ -48,7 +48,11 @@ abstract class Module implements ModuleInterface
      */
     protected function bind(string $interface)
     {
-        return new Bind($this->getContainer(), $interface);
+        $bind = new Bind($this->getContainer(), $interface);
+        // if (!interface_exists($interface)) {
+        //     $bind->to($interface);
+        // }
+        return $bind;
     }
 
     /**
