@@ -5,7 +5,7 @@ namespace Nora\DI;
 /**
  * 依存性注入
  */
-class Injector
+class Injector implements InjectorInterface
 {
     private $module;
 

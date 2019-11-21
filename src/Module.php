@@ -75,7 +75,7 @@ abstract class Module implements ModuleInterface
      */
     abstract public function configure();
 
-    public function override(self $module)
+    public function override(ModuleInterface $module)
     {
         $module->getContainer()->merge($this->container);;
         $this->container = $module->getContainer();
