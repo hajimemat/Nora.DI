@@ -80,7 +80,7 @@ abstract class AbstractModule implements ModuleInterface
 
     public function override(self $module)
     {
-        $module->getContainer()->merge($this->container);;
+        $module->getContainer()->merge($this->container);
         $this->container = $module->getContainer();
     }
 }
