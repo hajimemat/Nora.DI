@@ -1,5 +1,8 @@
 {
-    "name": "nora-php/di",
+    "name": "avap/nora-di",
+    "description": "di library",
+    "type": "library",
+    "license": "MIT",
     "authors": [
         {
             "name": "Hajime MATSUMOTO",
